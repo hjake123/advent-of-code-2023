@@ -57,11 +57,7 @@ int main(int argc, char **argv){
     while(!input_file.eof()){
         string line;
         getline(input_file, line);
-        int digit1, digit2;
-        digit1 = find_first_digit(line);
-        digit2 = find_last_digit(line);
-        count += digit1*10 + digit2;
-        cout << digit1 << " " << digit2 << endl;
+        count += find_first_digit(line)*10 + find_last_digit(line);
     }
     cout << count;
 }
