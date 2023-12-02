@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+day1/.vscode/launch.json
+day1/.vscode/tasks.json
+day1/.vscode/settings.json
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/tasks.json
