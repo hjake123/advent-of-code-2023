@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 
+#include "hyper.hpp"
+
 using namespace std;
 
 int const MAX_RED = 12;
@@ -79,12 +81,7 @@ auto power(game_minima const &gm) -> int{
 }
 
 int main(int argc, char **argv){
-    string filename = argc == 1 ? "example.txt" : argv[1];
-    ifstream input_file = ifstream(filename);
-    if(!input_file.is_open()){
-        cerr << "Couldn't find input file " << filename;
-        exit(1);
-    }
+    ifstream input_file = hyper_open(argc, argv, "example.txt");
     int count = 0;
     while(!input_file.eof()){
         string line;
