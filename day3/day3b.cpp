@@ -92,7 +92,7 @@ auto find_gear_ratio_sum(vector<vector<char>> &schematic, vector<vector<vector<i
 }
 
 int main(int argc, char **argv){
-    auto infile = hyper_open(argc, argv, "example.txt");
+    auto infile = hyper_open(argc, argv, "in.txt");
 
     // First, read the schematic into memory for easier manipulation.
     vector<vector<char>> schematic;
