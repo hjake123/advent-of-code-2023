@@ -3,7 +3,6 @@
 #include <vector>
 
 #include "hyper.hpp"
-#include "day3a.h"
 
 using namespace std;
 
@@ -67,7 +66,7 @@ auto find_part_numbers(vector<vector<char>> &schematic, vector<vector<bool>> &hi
 }
 
 int main(int argc, char **argv){
-    auto infile = hyper_open(argc, argv, "input.txt");
+    auto infile = hyper::open(argc, argv, "input.txt");
 
     // First, read the schematic into memory for easier manipulation.
     vector<vector<char>> schematic;
@@ -79,6 +78,6 @@ int main(int argc, char **argv){
     mark_hitmap(schematic, hitmap);
     //debug_print(hitmap);
 
-    cout << sum(find_part_numbers(schematic, hitmap));
+    cout << hyper::sum(find_part_numbers(schematic, hitmap));
 
 }
