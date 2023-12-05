@@ -36,6 +36,46 @@ auto split_by_space(std::string const &in) -> std::vector<std::string>{
     return tokens;
 }
 
+/*
+Parse a vector of strings into a vector of ints, leaving out any that start with a non-digit character.
+*/
+auto parse_ints(std::vector<std::string> tokens) -> std::vector<int>{
+    std::vector<int> numbers;
+    for(std::string token : tokens){
+        if(token.size() != 0 && isdigit(token[0])){
+            numbers.push_back(stoi(token));
+        }
+    }
+    return numbers;
+}
+
+/*
+Parse space-seperated integers from a string.
+*/
+auto parse_ints(std::string line) -> std::vector<int>{
+    return parse_ints(split_by_space(line));
+}
+
+/*
+Parse a vector of strings into a vector of long longs, leaving out any that start with a non-digit character.
+*/
+auto parse_long_longs(std::vector<std::string> tokens) -> std::vector<long long>{
+    std::vector<long long> numbers;
+    for(std::string token : tokens){
+        if(token.size() != 0 && isdigit(token[0])){
+            numbers.push_back(stoll(token));
+        }
+    }
+    return numbers;
+}
+
+/*
+Parse space-seperated long longs from a string.
+*/
+auto parse_long_longs(std::string line) -> std::vector<long long>{
+    return parse_long_longs(split_by_space(line));
+}
+
 void debug_print(std::vector<std::vector<char>> grid){
     for(std::vector<char> v : grid){
         for(char c : v){
