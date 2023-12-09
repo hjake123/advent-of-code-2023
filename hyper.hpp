@@ -42,7 +42,7 @@ Parse a vector of strings into a vector of ints, leaving out any that start with
 auto parse_ints(std::vector<std::string> tokens) -> std::vector<int>{
     std::vector<int> numbers;
     for(std::string token : tokens){
-        if(token.size() != 0 && isdigit(token[0])){
+        if(token.size() != 0 && (isdigit(token[0]) || token[0] == '-' && isdigit(token[1]))){
             numbers.push_back(stoi(token));
         }
     }
@@ -104,6 +104,13 @@ void debug_print(std::vector<std::vector<int>> grid){
         std::cout << "\n";
     }
     std::cout << std::flush;
+}
+
+void debug_print(std::vector<int> ints){
+    for(int i : ints){
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
 }
 
 auto sum(std::vector<int> ints) -> int{
