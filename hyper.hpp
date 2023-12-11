@@ -86,6 +86,13 @@ void debug_print(std::vector<std::vector<char>> const &grid){
     std::cout << std::flush;
 }
 
+void debug_print(std::vector<std::string> const &grid){
+    for(std::string s : grid){
+        std::cout << s << "\n";
+    }
+    std::cout << std::flush;
+}
+
 void debug_print(std::vector<std::vector<bool>> const &grid){
     for(std::vector<bool> v : grid){
         for(bool b : v){
