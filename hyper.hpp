@@ -15,18 +15,18 @@ auto open(int const argc, char const * const * const argv, std::string const &fa
 }
 
 /*
-Split a string into a vector of strings seperated by spaces.
+Split a string into a vector of strings seperated by a particular character.
 This DOES reallocate memory for everything in the original string, but like these are usually
 less then a kilobyte so it seems alright.
 */
-auto split_by_space(std::string const &in) -> std::vector<std::string>{
+auto split(std::string const &in, char sep) -> std::vector<std::string>{
     std::vector<std::string> tokens;
     std::string buffer;
     for(char c : in){
-        if(c == ' ' && buffer.size() > 0){
+        if(c == sep && buffer.size() > 0){
             tokens.push_back(buffer);
             buffer = "";
-        }else if(c != ' '){
+        }else if(c != sep){
             buffer.push_back(c);
         }
     }
@@ -34,6 +34,15 @@ auto split_by_space(std::string const &in) -> std::vector<std::string>{
         tokens.push_back(buffer);
     }
     return tokens;
+}
+
+/*
+Split a string into a vector of strings seperated by spaces.
+This DOES reallocate memory for everything in the original string, but like these are usually
+less then a kilobyte so it seems alright.
+*/
+auto split_by_space(std::string const &in) -> std::vector<std::string>{
+    return split(in, ' ');
 }
 
 /*

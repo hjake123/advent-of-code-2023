@@ -2,6 +2,8 @@
 #include <fstream>
 #include <vector>
 #include <set>
+#include <cmath>
+#include <algorithm>
 
 #include "hyper.hpp"
 
@@ -69,68 +71,28 @@ auto trim_redundant_space(string const &record) -> string{
     return trimmed;
 }
 
-/*
-As a reminder, arrangement is the expanded minimum sequence with some dots added, and key is the 
-sequence from the input data with ?s.
-*/
-auto validate_arrangement(string const &arrangement, string const &key) -> bool{
-    if(arrangement.size() != key.size())
+auto validate(string const &sequence, string const &key) -> bool{
+    if(sequence.size() != key.size())
         return false;
 
     for(int i = 0; i < key.size(); i++){
-        if(key[i] != '?' && key[i] != arrangement[i]){
+        if(key[i] != '?' && key[i] != sequence[i]){
             return false;
         }
     }
     return true;
 }
 
-auto build_arrangements(string const &sequence, string const &key, set<string> &arrangements, set<string> &failed_arrangements) -> bool{
-    if(arrangements.count(sequence) > 0 || failed_arrangements.count(sequence) > 0){
-        return arrangements.count(sequence) > 0;
-    }
-    if(validate_arrangement(sequence, key)){
-        arrangements.emplace(sequence);
-        return true;
-    }
-    if(sequence.size() == key.size()){
-        failed_arrangements.emplace(sequence);
-        return false;
-    }
-    
-    bool success = false;
-    if(key.front() == '?'){
-        success = build_arrangements('.' + sequence, key, arrangements, failed_arrangements) || success;
-    }
-    if(key.back() == '?'){
-        success = build_arrangements(sequence + ".", key, arrangements, failed_arrangements) || success;
-    }
-    for(int i = 1; i < sequence.size()-1; i++){
-        if(sequence[i] == '.'){
-            string modified = sequence;
-            modified.insert(i, ".");
-            success = build_arrangements(modified, key, arrangements, failed_arrangements) || success;
-        }
-    }
-    if(!success){
-        failed_arrangements.emplace(sequence);
-    }
-    return success;
-}
-
 int main(int argc, char **argv){
     vector<row> rows;
     ifstream file = hyper::open(argc, argv, "example.txt");
     parse_rows(file, rows);
+    debug_print(rows);
     int sum = 0;
-    int n = 0;
+
     for(row r : rows){
-        n++;
-        set<string> arrangements;
-        set<string> failed_arrangements;
-        build_arrangements(get_minimum_sequence(r.runs), trim_redundant_space(r.record), arrangements, failed_arrangements);
-        sum += arrangements.size();
-        cout << n << " : " << arrangements.size() << " with " << failed_arrangements.size() << " failed" << endl;
+        
+        
     }
     cout << sum;
 }

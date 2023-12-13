@@ -1,0 +1,53 @@
+Notes for solving the problem.
+
+GSD3 -- Process of Elimination
+Overall concept is to remove sections and/or numbers when you find resolutions for them.
+
+EXAMPLES
+Problem I: ???.### 1,1,3
+    3: There is one place to put 3. New problem: ???. 1,1
+    1a (first): There are three places to put 1, but two of them remove all accessible ? while there are still more numbers left, so only one valid. New problem: #.? 1
+    1b: There is one place to put 1. Base case, so return 1.
+
+Problem II: .??..??...?##. 1,1,3
+    Reduce to ??.??.?## 1,1,3
+    There is one place to put 3. New problem: ??.?? 1,1.
+    1a: There are four places to put 1, but one of them removes all accessible ?, so only 2 are valid. New problem: ?? 1 x2
+    There are two places to put 1. Base case, so return 2 x2 = 4.
+
+Problem III: ?#?#?#?#?#?#?#? 1,3,1,6
+    There are seven places to put 1. Unsure how to continue.......
+
+OLD
+EXAMPLES
+Let's look at the example problems and see about evaluating the ?s 1 at a time...
+
+Problem I: ???.### 1,1,3
+?1 - if ? is ., then the rest of the string doesn't have room for 1,1,3; ?1 is #
+?2 - if ? is ., no issue. If ? is #, forms a run of 2, which isn't the first run in 1,1,3; ?2 is .
+?3 - if ? is ., then the rest of the string doesn't have room for 1,3; ?3 is #.
+There was only one possibility to resolve this run.
+
+Problem II: .??..??...?##. 1,1,3
+?1 - if ? is ., no issue. If ? is #, no issue. ?1 can be either!
+?2 - if ? is . and ?1 is ., issue. If ? is . and ?1 and #, no issue. if ? is # and ?1 is ., no issue. If ? is # and ?1 is #, issue.
+There were two valid possibilities in the ?1 to ?2 run; memorize that.
+
+Repeat for similar ?3 and ?4 run.
+
+?5 - if ? is ., issue. if ? is #, no issue. ?5 is #
+
+Multiplying the possibilities generated gets 4.
+
+GENERAL SOLUTION DRAFT 1
+For each run of ?s in the sequence:
+    Check if ? must be #:
+        Scan the rest of the sequence to see if the not already consumed numbers could fit if ? was . If not, set ? as #.
+    Check if ? must be .:
+        Check to see if making ? into # creates a run longer then the number you're on (todo what does that mean)
+    If ? remains undecided, remember that. (writing ended, don't know how to continue this)
+
+GENERAL SOLUTION DRAFT 2
+Map each run (number) to one chunk (sequence of ?#). Use math to find option count from there.
+Runs must be mapped in sorted order to ensure there is room for big numbers.
+
